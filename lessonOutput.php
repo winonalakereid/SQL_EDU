@@ -20,5 +20,6 @@ $questionText = $currentExerciseInfo['QuestionText'];
 echo "<p>". $leadingText ."</p>";
 echo "<br /><br />";
 echo "<p>" .$questionText .":</p>";
-
-?>
+echo "<br />";
+echo "<div id = 'resultArea'></div>";
+?> 

@@ -2,7 +2,42 @@ var currentLessonNumber;
 var currentExerciseNumber;
 
 $(document).ready(function() {
-	
+	sideBarBuilder();
+	$("#submit-response").click(function(){
+		submitResponse();	
+	});
+	$("#next-exercise").click(function(){
+		nextExerciseClick();
+	});	
+});
+
+function correctAnswer(){
+	bootbox.alert("Right! Take a look at what the result gives you, then let's move on to the next exercise");
+	$("#submit-response").attr("disabled", "disabled");
+	$("#next-exercise").removeAttr("disabled");
+
+}
+function incorrectAnswer() {
+	bootbox.alert("That's not quite right go ahead and check you typed it in correctly!");
+}
+function getUrlParameters(parameter, staticURL, decode){
+   var currLocation = staticURL,
+       parArr = currLocation.split("&"),
+       returnBool = true;
+   
+   for(var i = 0; i < parArr.length; i++){
+        parr = parArr[i].split("=");
+        if(parr[0] == parameter){
+            return (decode) ? decodeURIComponent(parr[1]) : parr[1];
+            returnBool = true;
+        }else{
+            returnBool = false;            
+        }
+   }
+   
+   if(!returnBool) return false;  
+}
+function sideBarBuilder(){
 	$.ajax({
 		url: 'buildSideBar.php',
 		success: function(msg){
@@ -40,7 +75,7 @@ $(document).ready(function() {
 						}
 					});
 					thisLink = ($(this).attr('href'));
-					$(this).attr("class", "active");
+					$(this).addClass("active");
 					
 					currentLessonNumber = getUrlParameters("lesson", thisLink , true);
 					currentExerciseNumber = getUrlParameters("exercise", thisLink, true);
@@ -52,39 +87,43 @@ $(document).ready(function() {
 			});
 		}
 	});
-	$("#submit-response").click(function(){
-		console.log(currentLessonNumber);
-		$.ajax({
-			type: 'GET',
-			url: 'checkAnswers.php',
-			data: 'response=' + $('#responder').val() +'&lesson=' + currentLessonNumber +'&exercise=' +currentExerciseNumber,
-			success: function(msg){
-				if(msg){
-					correctAnswer();
-					$.ajax({
-						type: 'GET',
-						url: 'completedExercise.php',
-						data: 'exercise=' + currentExerciseNumber,
-						success: function(msg){
-							console.log(msg);
-							var nextExercise = currentExerciseNumber;
-							console.log(nextExercise);
-							nextExercise++;
-							console.log(currentLessonNumber + "." +nextExercise);
-							var enabledLink = document.getElementById(currentLessonNumber + "." + nextExercise);
-							console.log(enabledLink);
-							$(enabledLink).removeClass("disabledLink");
-						}
-					});
-				} else {
-					incorrectAnswer();
-				}
+
+}
+
+function submitResponse(){
+	console.log(currentLessonNumber);
+	$.ajax({
+		type: 'GET',
+		url: 'checkAnswers.php',
+		data: 'response=' + $('#responder').val() +'&lesson=' + currentLessonNumber +'&exercise=' +currentExerciseNumber,
+		success: function(msg){
+			if(msg){
+				$("#resultArea").html(msg);
+				correctAnswer();
+				$.ajax({
+					type: 'GET',
+					url: 'completedExercise.php',
+					data: 'exercise=' + currentExerciseNumber,
+					success: function(msg){
+						console.log(msg);
+						var nextExercise = currentExerciseNumber;
+						console.log(nextExercise);
+						nextExercise++;
+						console.log(currentLessonNumber + "." +nextExercise);
+						var enabledLink = document.getElementById(currentLessonNumber + "." + nextExercise);
+						console.log(enabledLink);
+						$(enabledLink).removeClass("disabledLink");
+					}
+				});
+			} else {
+				incorrectAnswer();
 			}
-		});
+		}
 	});
-	
-	$("#next-exercise").click(function(){
-		var nextExercise = currentExerciseNumber;
+}
+
+function nextExerciseClick(){
+	var nextExercise = currentExerciseNumber;
 		var nextLesson = currentLessonNumber;
 		nextLesson++;
 		nextExercise++;
@@ -152,35 +191,21 @@ $(document).ready(function() {
 				}
 			}
 		});
+}
+
+function testTest(){
+	var test = false;
+	$.ajax({
+		type: 'GET',
+		url: 'test.php',
+		success: function(msg){
+			if(msg){
+				test = true;
+			}
+		}
 	});
 	
-});
-
-function correctAnswer(){
-	bootbox.alert("Right! Take a look at what the result gives you, then let's move on to the next exercise");
-	$("#submit-response").attr("disabled", "disabled");
-	$("#next-exercise").removeAttr("disabled");
-
-}
-
-function incorrectAnswer() {
-	bootbox.alert("That's not quite right go ahead and check you typed it in correctly!");
-}
-
-function getUrlParameters(parameter, staticURL, decode){
-   var currLocation = staticURL,
-       parArr = currLocation.split("&"),
-       returnBool = true;
-   
-   for(var i = 0; i < parArr.length; i++){
-        parr = parArr[i].split("=");
-        if(parr[0] == parameter){
-            return (decode) ? decodeURIComponent(parr[1]) : parr[1];
-            returnBool = true;
-        }else{
-            returnBool = false;            
-        }
-   }
-   
-   if(!returnBool) return false;  
+	//if(test){
+		return true;
+	//}
 }

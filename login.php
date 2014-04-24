@@ -2,8 +2,8 @@
 	session_start();
 	include('conn.php');
 	
-	$email = trim($_POST['email']);
-	$password = $_POST['password'];
+	$email = trim($_GET['email']);
+	$password = $_GET['password'];
 	
 	//echo $username;
 	//echo $password;
@@ -22,10 +22,10 @@
 		$_SESSION['email'] = $email;
 		$_SESSION['id'] = $userID;
 		$_SESSION['initiated'] = true;
-		header('Location: prototype.php');	
+		echo true;	
 	} else {
 		$_SESSION['initiated'] = false;
-		header('Location: index.php?login=failed');
+		echo false;
 	}
 	
 	

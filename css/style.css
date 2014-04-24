@@ -7,6 +7,15 @@ body {
 	float: left;
 }
 
+#logout{
+	float: right;
+	margin-right: 5%;
+	
+}
+#logout a{
+	color: #daddd1;
+}
+
 #side-menu-wrapper{
 	height: 100%;
 	width: 15%;
@@ -22,6 +31,10 @@ body {
 	width: 80%;
 	height: 50%;
 	margin-left: 5%;
+}
+
+table {
+	color:rgba(33,232,70,0.87);
 }
 
 #exercise-text-wrapper {
@@ -199,7 +212,7 @@ a {
 	text-decoration: none;
 }
 .active {
-	color: #fa880f;
+	color: #fa880f !important;
 	text-decoration: none;
 	font-weight: bold;
 }
