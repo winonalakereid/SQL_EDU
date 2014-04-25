@@ -1,3 +1,9 @@
+<?php
+	if(!isset($_SESSION['Administrator'])){
+		header('Location: prototype.php');
+	}
+
+?>
 <html>
 	<head>
 		<link href="css/bootstrap.css" rel="stylesheet">
