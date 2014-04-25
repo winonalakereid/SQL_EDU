@@ -18,7 +18,7 @@ function correctAnswer(){
 
 }
 function incorrectAnswer() {
-	bootbox.alert("That's not quite right go ahead and check you typed it in correctly!");
+	bootbox.alert("That's not quite right go ahead and check you typed it in correctly! Remember that SQL is case-sensitive. So make sure you are capitilizing everything based off of how it looks in the question and that all SQL commands and clauses are all UPPER CASE. Also check to make sure you have a semicolon at the end of your command");
 }
 function getUrlParameters(parameter, staticURL, decode){
    var currLocation = staticURL,
