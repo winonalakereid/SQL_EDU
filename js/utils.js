@@ -39,7 +39,7 @@ function getUrlParameters(parameter, staticURL, decode){
 }
 function sideBarBuilder(){
 	$.ajax({
-		url: 'buildSideBar.php',
+		url: '/sqledu/buildSideBar.php',
 		success: function(msg){
 			$('#lessons-list').html(msg);
 			
@@ -60,7 +60,7 @@ function sideBarBuilder(){
 					});
 					$.ajax({
 						type: 'GET',
-						url: 'lessonOutput.php',
+						url: '/sqledu/lessonOutput.php',
 						data: ($(this).attr('href')),
 						success: function(msg){
 							$('#exercise-text-wrapper').html(msg);
@@ -68,7 +68,7 @@ function sideBarBuilder(){
 					});
 					$.ajax({
 						type: 'GET',
-						url:'exerciseTitle.php',
+						url:'/sqledu/exerciseTitle.php',
 						data: ($(this).attr('href')),
 						success: function(msg){
 							$('#exercise-title').html(msg);
@@ -94,7 +94,7 @@ function submitResponse(){
 	console.log(currentLessonNumber);
 	$.ajax({
 		type: 'GET',
-		url: 'checkAnswers.php',
+		url: '/sqledu/checkAnswers.php',
 		data: 'response=' + $('#responder').val() +'&lesson=' + currentLessonNumber +'&exercise=' +currentExerciseNumber,
 		success: function(msg){
 			if(msg){
@@ -102,7 +102,7 @@ function submitResponse(){
 				correctAnswer();
 				$.ajax({
 					type: 'GET',
-					url: 'completedExercise.php',
+					url: '/sqledu/completedExercise.php',
 					data: 'exercise=' + currentExerciseNumber,
 					success: function(msg){
 						console.log(msg);
@@ -129,7 +129,7 @@ function nextExerciseClick(){
 		nextExercise++;
 		$.ajax({
 			type: 'GET',
-			url: 'verifyNextExercise.php',
+			url: '/sqledu/verifyNextExercise.php',
 			data: 'lesson=' + currentLessonNumber +'&exercise=' + nextExercise,
 			success: function(msg){
 				if(msg){
@@ -191,21 +191,4 @@ function nextExerciseClick(){
 				}
 			}
 		});
-}
-
-function testTest(){
-	var test = false;
-	$.ajax({
-		type: 'GET',
-		url: 'test.php',
-		success: function(msg){
-			if(msg){
-				test = true;
-			}
-		}
-	});
-	
-	//if(test){
-		return true;
-	//}
 }

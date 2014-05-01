@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(isset($_SESSION['initiated'])){
-		header('Location: prototype.php');
+		header('Location: /sqledu/prototype.php');
 	}
 
 ?>

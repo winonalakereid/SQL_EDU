@@ -2,7 +2,7 @@
 	session_start();
 	
 	if(!isset($_SESSION['initiated'])){
-		header('Location: index.php');
+		header('Location: /sqledu/index.php');
 	}
 
 ?>
@@ -27,7 +27,6 @@
 				
 
     <div id="wrapper" class="main-page-content">
-    	<?php if(isset($_SESSION['Administrator'])){ echo "<span id = "addLesson"><a href = "cms.php">Add Lesson</a></span>"; }?>
     	<span id = "logout"><a href = "logout.php">Logout</a></span>
     	<h2 id='exercise-title'>Welcome, <?php echo $_SESSION['fName']; ?>!</h2>
     	<div id="exercise-text-wrapper"></div>

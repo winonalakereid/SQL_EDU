@@ -1,6 +1,6 @@
 <?php
 	if(!isset($_SESSION['Administrator'])){
-		header('Location: prototype.php');
+		header('Location: /sqledu/prototype.php');
 	}
 
 ?>
