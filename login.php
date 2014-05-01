@@ -8,7 +8,7 @@
 	//echo $username;
 	//echo $password;
 	
-	$result = mysqli_query($conn, "SELECT * FROM CapstoneUsers WHERE BSUEmail ='$email'");
+	$result = mysqli_query($conn, "SELECT * FROM UserAccounts WHERE Uname ='$email'");
 	$userInfo = mysqli_fetch_array($result); 
 	
 	$userPass = $userInfo['Pass'];
